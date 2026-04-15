@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import logoImage from "./assets/vivero-camuendo.jpg";
 import { categoryData } from "./catalog.js";
@@ -61,6 +61,8 @@ export default function App() {
   const [cartBubblePosition, setCartBubblePosition] = useState({ right: 28, bottom: 28 });
   const [cartDragging, setCartDragging] = useState(false);
   const cartDragRef = useRef({ startX: 0, startY: 0, startRight: 28, startBottom: 28 });
+  const [carouselInteracting, setCarouselInteracting] = useState(false);
+  const carouselRef = useRef(null);
 
   const whatsappNumber = "593980752799";
   const formatWhatsAppText = () => {
@@ -110,6 +112,26 @@ export default function App() {
     const text = encodeURIComponent(formatWhatsAppText());
     window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank");
   };
+
+  useEffect(() => {
+    const node = carouselRef.current;
+    if (!node) return;
+
+    let animationFrame = 0;
+    const step = () => {
+      if (!carouselInteracting && node.scrollWidth > 0) {
+        const halfWidth = node.scrollWidth / 2;
+        node.scrollLeft += 0.35;
+        if (node.scrollLeft >= halfWidth) {
+          node.scrollLeft -= halfWidth;
+        }
+      }
+      animationFrame = requestAnimationFrame(step);
+    };
+
+    animationFrame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [carouselInteracting]);
 
   const activeCategoryData = categoryData.find((category) => category.name === activeCategory);
   const pageSize = 3;
@@ -219,7 +241,14 @@ export default function App() {
           </div>
 
           <div className="mt-8 overflow-hidden">
-            <div className="catalog-carousel flex gap-3">
+            <div
+              ref={carouselRef}
+              className="catalog-carousel flex gap-3 overflow-x-auto px-1 py-1 scrollbar-hide"
+              onPointerDown={() => setCarouselInteracting(true)}
+              onPointerUp={() => setCarouselInteracting(false)}
+              onPointerLeave={() => setCarouselInteracting(false)}
+              onPointerCancel={() => setCarouselInteracting(false)}
+            >
               {[...categoryData, ...categoryData].map((category, index) => (
                 <button
                   key={`${category.name}-${index}`}
@@ -241,39 +270,6 @@ export default function App() {
           </div>
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-3xl bg-emerald-50 p-8 shadow-lg ring-1 ring-emerald-100">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                {activeCategoryData.name}
-              </p>
-              <p className="mt-4 text-lg leading-8 text-zinc-700">{activeCategoryData.description}</p>
-              <div className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                      Producto destacado
-                    </p>
-                    <h3 className="mt-3 text-2xl font-bold text-zinc-900">{activeProduct.title}</h3>
-                    <p className="mt-2 text-sm text-zinc-500">{activeProduct.subtitle}</p>
-                  </div>
-                  <span className="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
-                    {activeProduct.price ?? "Consultar precio"}
-                  </span>
-                </div>
-                <p className="mt-6 text-sm leading-7 text-zinc-600">{activeProduct.details}</p>
-                <div className="mt-8 flex flex-wrap gap-4">
-                  <button
-                    onClick={() => handleAddToCart(activeProduct)}
-                    className="inline-flex items-center rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
-                  >
-                    Agregar al carrito
-                  </button>
-                  <button className="inline-flex items-center rounded-full border border-emerald-700 bg-white px-5 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50">
-                    Ver detalles
-                  </button>
-                </div>
-              </div>
-            </div>
-
             <div>
               <div className="flex items-center justify-between gap-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
                 <div>
@@ -281,14 +277,15 @@ export default function App() {
                   <p className="mt-2 text-sm text-zinc-600">Selecciona un producto para ver detalles y agregarlo al carrito.</p>
                 </div>
                 <span className="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                  Nivel 2</span>
+                  Nivel 2
+                </span>
               </div>
 
               <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between gap-4 rounded-3xl bg-zinc-50 p-4">
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Opciones del catálogo</p>
-                    <p className="mt-2 text-sm text-zinc-600">Elige productos desde el listado y usa la paginación para ver más opciones.</p>
+                    <p className="mt-2 text-sm text-zinc-600">Desliza o arrastra para avanzar más rápido o más lento.</p>
                   </div>
                   <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
                     <button
@@ -344,6 +341,75 @@ export default function App() {
                 </div>
               </div>
 
+              <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Carrito rápido</p>
+                    <p className="mt-2 text-sm text-zinc-600">Lista de productos que deseas revisar o agregar luego.</p>
+                  </div>
+                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                    {cartItems.length} item{cartItems.length === 1 ? "" : "s"}
+                  </span>
+                </div>
+                <div className="mt-6 space-y-4">
+                  {cartItems.length === 0 ? (
+                    <p className="text-sm text-zinc-500">Tu carrito está vacío. Selecciona un producto para añadirlo.</p>
+                  ) : (
+                    cartItems.map((item) => (
+                      <div key={item.title} className="rounded-3xl bg-zinc-50 p-4">
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <p className="text-sm font-semibold text-zinc-900">{item.title}</p>
+                            <p className="text-xs text-zinc-500">{item.subtitle}</p>
+                          </div>
+                          <p className="text-sm font-semibold text-emerald-700">x{item.quantity}</p>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+                <div className="mt-6">
+                  <button
+                    onClick={handleSendWhatsApp}
+                    className="w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+                  >
+                    📲 Enviar lista por WhatsApp
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl bg-emerald-50 p-8 shadow-lg ring-1 ring-emerald-100">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                {activeCategoryData.name}
+              </p>
+              <p className="mt-4 text-lg leading-8 text-zinc-700">{activeCategoryData.description}</p>
+              <div className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                      Producto destacado
+                    </p>
+                    <h3 className="mt-3 text-2xl font-bold text-zinc-900">{activeProduct.title}</h3>
+                    <p className="mt-2 text-sm text-zinc-500">{activeProduct.subtitle}</p>
+                  </div>
+                  <span className="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
+                    {activeProduct.price ?? "Consultar precio"}
+                  </span>
+                </div>
+                <p className="mt-6 text-sm leading-7 text-zinc-600">{activeProduct.details}</p>
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <button
+                    onClick={() => handleAddToCart(activeProduct)}
+                    className="inline-flex items-center rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+                  >
+                    Agregar al carrito
+                  </button>
+                  <button className="inline-flex items-center rounded-full border border-emerald-700 bg-white px-5 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50">
+                    Ver detalles
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 

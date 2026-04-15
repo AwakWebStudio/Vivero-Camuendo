@@ -546,7 +546,7 @@ export default function App() {
               Comunicados
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
-              Contenido para informar y atraer clientes
+              Explora el mundo hoy
             </h2>
           </div>
 

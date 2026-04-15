@@ -175,26 +175,63 @@ export default function App() {
         </section>
 
         <section id="contacto" className="bg-emerald-700 py-20 text-white">
-          <div className="mx-auto max-w-5xl px-4 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              ¿Quieres una web como esta, pero con tu marca?
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-emerald-50">
-              Aquí colocaremos tu llamada a la acción principal: WhatsApp, formulario, cotización o contacto directo.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a
-                href="#"
-                className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-50"
-              >
-                Escribir por WhatsApp
-              </a>
-              <a
-                href="#"
-                className="rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                Ver servicios
-              </a>
+          <div className="mx-auto max-w-7xl px-4">
+            <div className="text-center">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200">
+                Contacto y ubicación
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+                Visítanos en Plaza Wayku Chupa, Camuendo
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-emerald-100">
+                Estamos a un paso del Lago San Pablo, con atención todo el fin de semana y espacio seguro para estacionar.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+              <div className="rounded-3xl bg-white/10 p-8 ring-1 ring-white/10 backdrop-blur">
+                <h3 className="text-xl font-semibold text-white">📍 Ubicación</h3>
+                <p className="mt-4 text-sm leading-7 text-emerald-100">
+                  Calle Mariscal Sucre y entrada "Wayku Chupa", Camuendo, Imbabura, Ecuador.
+                </p>
+                <p className="mt-3 text-sm leading-7 text-emerald-100">
+                  Referencia: A 1 cuadra de las Cabañas del Lago, cerca del Lago San Pablo (Imbakucha), Otavalo.
+                </p>
+                <p className="mt-3 text-sm leading-7 text-emerald-100">Código postal: 100450</p>
+
+                <div className="mt-6 space-y-4 text-sm leading-7 text-emerald-100">
+                  <div>
+                    <strong className="font-semibold text-white">Desde Otavalo:</strong>
+                    <p className="mt-1">Toma la vía hacia el Lago San Pablo. Pasa las Cabañas del Lago y gira a la derecha en la entrada "Wayku Chupa". Está a 100 metros.</p>
+                  </div>
+                  <div>
+                    <strong className="font-semibold text-white">Desde Lago San Pablo:</strong>
+                    <p className="mt-1">Desde el centro, toma la calle principal hacia Otavalo. Busca la entrada "Wayku Chupa" a tu izquierda.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-6">
+                <div className="rounded-3xl bg-white/10 p-8 ring-1 ring-white/10 backdrop-blur">
+                  <h3 className="text-xl font-semibold text-white">🕒 Horarios de atención</h3>
+                  <p className="mt-4 text-sm leading-7 text-emerald-100">Lunes a sábado: 08:00 – 17:30</p>
+                  <p className="mt-2 text-sm leading-7 text-emerald-100">Domingo: 10:30 – 17:30</p>
+                </div>
+
+                <div className="rounded-3xl bg-white/10 p-8 ring-1 ring-white/10 backdrop-blur">
+                  <h3 className="text-xl font-semibold text-white">🚗 Estacionamiento</h3>
+                  <p className="mt-4 text-sm leading-7 text-emerald-100">
+                    Disponibilidad de espacio para estacionar vehículos de forma segura cerca del vivero.
+                  </p>
+                </div>
+
+                <div className="rounded-3xl bg-white/10 p-8 ring-1 ring-white/10 backdrop-blur">
+                  <h3 className="text-xl font-semibold text-white">📱 Contacto</h3>
+                  <p className="mt-4 text-sm leading-7 text-emerald-100">WhatsApp: <a href="https://wa.me/5930980752799" className="font-semibold text-white underline">+593 0980752799</a></p>
+                  <p className="mt-3 text-sm leading-7 text-emerald-100">Facebook: <span className="font-semibold text-white">ViveroChuskuWarmi</span></p>
+                  <p className="mt-2 text-sm leading-7 text-emerald-100">Instagram: <span className="font-semibold text-white">vivero.chuskuwarmi</span></p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

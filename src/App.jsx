@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import "./App.css";
 import logoImage from "./assets/vivero-camuendo.jpg";
 import { categoryData } from "./catalog.js";
 
@@ -56,6 +57,10 @@ export default function App() {
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
   const [catalogPage, setCatalogPage] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartBubblePosition, setCartBubblePosition] = useState({ right: 28, bottom: 28 });
+  const [cartDragging, setCartDragging] = useState(false);
+  const cartDragRef = useRef({ startX: 0, startY: 0, startRight: 28, startBottom: 28 });
 
   const whatsappNumber = "593980752799";
   const formatWhatsAppText = () => {
@@ -71,6 +76,34 @@ export default function App() {
     ];
 
     return lines.join("\n");
+  };
+
+  const handleBubblePointerDown = (event) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setCartDragging(true);
+    cartDragRef.current = {
+      startX: event.clientX,
+      startY: event.clientY,
+      startRight: cartBubblePosition.right,
+      startBottom: cartBubblePosition.bottom,
+    };
+  };
+
+  const handleBubblePointerMove = (event) => {
+    if (!cartDragging) return;
+
+    const deltaX = event.clientX - cartDragRef.current.startX;
+    const deltaY = event.clientY - cartDragRef.current.startY;
+
+    setCartBubblePosition({
+      right: Math.max(16, cartDragRef.current.startRight - deltaX),
+      bottom: Math.max(16, cartDragRef.current.startBottom - deltaY),
+    });
+  };
+
+  const handleBubblePointerUp = (event) => {
+    event.currentTarget.releasePointerCapture(event.pointerId);
+    setCartDragging(false);
   };
 
   const handleSendWhatsApp = () => {
@@ -185,17 +218,17 @@ export default function App() {
             </p>
           </div>
 
-          <div className="mt-8">
-            <div className="flex flex-wrap gap-3">
-              {categoryData.map((category) => (
+          <div className="mt-8 overflow-hidden">
+            <div className="catalog-carousel flex gap-3">
+              {[...categoryData, ...categoryData].map((category, index) => (
                 <button
-                  key={category.name}
+                  key={`${category.name}-${index}`}
                   onClick={() => {
                     setActiveCategory(category.name);
                     setActiveProductIndex(0);
                     setCatalogPage(0);
                   }}
-                  className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
+                  className={`flex-shrink-0 rounded-full border px-5 py-3 text-sm font-semibold transition ${
                     category.name === activeCategory
                       ? "border-emerald-700 bg-emerald-700 text-white"
                       : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
@@ -311,16 +344,49 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
+            </div>
+          </div>
+
+        <div
+          className="fixed z-40 cursor-grab"
+          style={{ right: cartBubblePosition.right, bottom: cartBubblePosition.bottom }}
+          onClick={() => setCartOpen(true)}
+          onPointerDown={handleBubblePointerDown}
+          onPointerMove={handleBubblePointerMove}
+          onPointerUp={handleBubblePointerUp}
+        >
+          <div className="flex h-14 min-h-[3.5rem] min-w-[3.5rem] items-center justify-center rounded-full bg-emerald-700 px-4 text-white shadow-2xl shadow-emerald-900/30 transition hover:scale-[1.02]">
+            <span className="text-lg">🛒</span>
+            {cartItems.length > 0 && (
+              <span className="ml-2 rounded-full bg-white px-2 py-1 text-xs font-semibold text-emerald-700">
+                {cartItems.length}
+              </span>
+            )}
+          </div>
+        </div>
+
+          {cartOpen && (
+            <div
+              className="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-sm"
+              onClick={() => setCartOpen(false)}
+            >
+              <div
+                className="mx-auto mt-24 max-w-md rounded-3xl bg-white p-6 shadow-2xl"
+                onClick={(event) => event.stopPropagation()}
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Carrito rápido</p>
-                    <p className="mt-2 text-sm text-zinc-600">Lista de productos que deseas revisar o agregar luego.</p>
+                    <p className="mt-1 text-sm text-zinc-600">Revisa los productos que añadiste antes de enviar.</p>
                   </div>
-                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                    {cartItems.length} item{cartItems.length === 1 ? "" : "s"}
-                  </span>
+                  <button
+                    onClick={() => setCartOpen(false)}
+                    className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-800"
+                  >
+                    ✕
+                  </button>
                 </div>
+
                 <div className="mt-6 space-y-4">
                   {cartItems.length === 0 ? (
                     <p className="text-sm text-zinc-500">Tu carrito está vacío. Selecciona un producto para añadirlo.</p>
@@ -338,17 +404,16 @@ export default function App() {
                     ))
                   )}
                 </div>
-                <div className="mt-6">
-                  <button
-                    onClick={handleSendWhatsApp}
-                    className="w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
-                  >
-                    📲 Enviar lista por WhatsApp
-                  </button>
-                </div>
+
+                <button
+                  onClick={handleSendWhatsApp}
+                  className="mt-6 w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+                >
+                  📲 Enviar lista por WhatsApp
+                </button>
               </div>
             </div>
-          </div>
+          )}
         </section>
 
         <section id="servicios" className="bg-zinc-50 py-20">

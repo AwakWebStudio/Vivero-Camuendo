@@ -161,6 +161,26 @@
   }
 }
 
+.catalog-carousel {
+  min-width: 100%;
+  display: flex;
+  gap: 0.75rem;
+  animation: carousel-scroll 28s linear infinite;
+}
+
+.catalog-carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes carousel-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .ticks {
   position: relative;
   width: 100%;

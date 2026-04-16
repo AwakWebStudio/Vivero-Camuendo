@@ -250,8 +250,19 @@ function CatalogPage({
   catalogSelectedCategory,
   setCatalogSelectedCategory,
 }) {
-  const catalogSelectedCategoryData = categoryData.find((cat) => cat.name === catalogSelectedCategory);
+  const catalogSelectedCategoryData = categoryData?.find((cat) => cat.name === catalogSelectedCategory);
   const catalogSelectedProducts = catalogSelectedCategoryData?.products ?? [];
+
+  // Verificación de seguridad por si los datos no están disponibles
+  if (!categoryData || categoryData.length === 0) {
+    return (
+      <section id="catalog-page" className="min-h-screen bg-emerald-50 py-8 text-zinc-900">
+        <div className="mx-auto max-w-7xl px-4 text-center">
+          <p className="text-lg text-zinc-600">Cargando catálogo...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="catalog-page" className="min-h-screen bg-emerald-50 py-8 text-zinc-900">
@@ -323,9 +334,9 @@ export default function App() {
   const [activeTopProductIndices, setActiveTopProductIndices] = useState([0, 1, 2, 3, 4, 5]);
   const [topProductHovers, setTopProductHovers] = useState([false, false, false, false, false, false]);
   const [topProductDraggings, setTopProductDraggings] = useState([false, false, false, false, false, false]);
-  const topProductDragRefs = useRef(Array(6).fill().map(() => ({ startX: 0, startIndex: 0 })));
+  const topProductDragRefs = useRef(Array(6).fill().map(() => ({ startX: 0, startY: 0, startIndex: 0 })));
 
-  const [catalogSidebarOpen, setCatalogSidebarOpen] = useState(true);
+  const [catalogSidebarOpen, setCatalogSidebarOpen] = useState(false);
   const [catalogSelectedCategory, setCatalogSelectedCategory] = useState(categoryData[0].name);
 
   const whatsappNumber = "593980752799";

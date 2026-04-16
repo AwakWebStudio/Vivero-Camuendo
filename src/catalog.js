@@ -4,8 +4,8 @@ export const categoryData = [
     description:
       "Frutales autóctonos y tropicales para clima andino y jardinería de huerta.",
     products: [
-      { title: "Naranja", subtitle: "Cítrico dulce", price: null, details: "Ideal para jugos y producción familiar.", image: "", stock: null },
-      { title: "Mandarina", subtitle: "Cítrico aromático", price: null, details: "Muy resistente y perfecto para cultivos de pequeña escala.", image: "", stock: null },
+      { title: "Naranja", subtitle: "Cítrico dulce", price: null, details: "Ideal para jugos y producción familiar.", image: "", stock: null, views: 4800, clicks: 310, engagement: 52 },
+      { title: "Mandarina", subtitle: "Cítrico aromático", price: null, details: "Muy resistente y perfecto para cultivos de pequeña escala.", image: "", stock: null, views: 3600, clicks: 220, engagement: 40 },
       { title: "Durazno", subtitle: "Fruta de pulpa suave", price: null, details: "Crece bien en climas templados con buena ventilación.", image: "", stock: null },
       { title: "Manzana", subtitle: "Manzano tradicional", price: null, details: "Variedad ideal para producción casera en altura.", image: "", stock: null },
       { title: "Ciruela (Claudia)", subtitle: "Fruta de mesa", price: null, details: "Planta de fruta dulce con excelente rendimiento.", image: "", stock: null },
@@ -17,13 +17,13 @@ export const categoryData = [
       { title: "Naranjilla", subtitle: "Fruta exótica", price: null, details: "Planta de fruto ácido apreciada para jugos.", image: "", stock: null },
       { title: "Guayaba", subtitle: "Fruta tropical", price: null, details: "Ideal para consumo fresco y procesados dulces.", image: "", stock: null },
       { title: "Guayabilla", subtitle: "Variedad local", price: null, details: "Planta de fruto pequeño muy sabroso.", image: "", stock: null },
-      { title: "Fresa", subtitle: "Fruta roja", price: null, details: "Planta ideal para macetas y bandejas flotantes.", image: "", stock: null },
+      { title: "Fresa", subtitle: "Fruta roja", price: null, details: "Planta ideal para macetas y bandejas flotantes.", image: "", stock: null, views: 5200, clicks: 370, engagement: 60 },
       { title: "Frambuesa", subtitle: "Pequeña y aromática", price: null, details: "Planta ornamental y comestible con frutos suaves.", image: "", stock: null },
       { title: "Uva", subtitle: "Vid para jardín", price: null, details: "Requiere soporte y exposición al sol.", image: "", stock: null },
       { title: "Granadilla", subtitle: "Fruta de pulpa aromática", price: null, details: "Planta trepadora que necesita tutor y clima frío.", image: "", stock: null },
       { title: "Tomate de árbol", subtitle: "Fruta andina", price: null, details: "Planta alta que produce frutos nutritivos y ácidos.", image: "", stock: null },
       { title: "Tomate riñón", subtitle: "Tomate para ensaladas", price: null, details: "Variedad de fruto firme y sabroso.", image: "", stock: null },
-      { title: "Tomate cherry", subtitle: "Tomate pequeño", price: null, details: "Excelente para cultivo en macetas y consumo fresco.", image: "", stock: null },
+      { title: "Tomate cherry", subtitle: "Tomate pequeño", price: null, details: "Excelente para cultivo en macetas y consumo fresco.", image: "", stock: null, views: 4000, clicks: 260, engagement: 42 },
       { title: "Chirimoya", subtitle: "Fruta tropical", price: null, details: "Planta de clima templado con frutos cremosos.", image: "", stock: null },
     ],
   },
@@ -32,8 +32,8 @@ export const categoryData = [
     description: "Especies útiles para remedios caseros, infusiones y aromatizar espacios.",
     products: [
       { title: "Ruda", subtitle: "Planta medicinal", price: null, details: "Usada para infusiones y tradición herbal.", image: "", stock: null },
-      { title: "Sábila", subtitle: "Aloe vera", price: null, details: "Muy utilizada para cuidado de la piel.", image: "", stock: null },
-      { title: "Menta", subtitle: "Hierba aromática", price: null, details: "Ideal para infusiones y aromatizar ambientes.", image: "", stock: null },
+      { title: "Sábila", subtitle: "Aloe vera", price: null, details: "Muy utilizada para cuidado de la piel.", image: "", stock: null, views: 4200, clicks: 280, engagement: 48 },
+      { title: "Menta", subtitle: "Hierba aromática", price: null, details: "Ideal para infusiones y aromatizar ambientes.", image: "", stock: null, views: 3900, clicks: 250, engagement: 45 },
       { title: "Cedro", subtitle: "Aromático y medicinal", price: null, details: "Planta de hojas fragantes y usos tradicionales.", image: "", stock: null },
       { title: "Hierba Luisa", subtitle: "Limoncillo", price: null, details: "Planta aromática para té digestivo.", image: "", stock: null },
       { title: "Toronjil", subtitle: "Melisa", price: null, details: "Planta calmante ideal para infusiones.", image: "", stock: null },
@@ -58,7 +58,7 @@ export const categoryData = [
     name: "Plantas ornamentales (flores)",
     description: "Flores y plantas decorativas para jardines, patios y balcones.",
     products: [
-      { title: "Geranios", subtitle: "Planta de flor", price: null, details: "Colorida y resistente, perfecta para macetas.", image: "", stock: null },
+      { title: "Geranios", subtitle: "Planta de flor", price: null, details: "Colorida y resistente, perfecta para macetas.", image: "", stock: null, views: 4100, clicks: 245, engagement: 43 },
       { title: "Begonias", subtitle: "Flores ornamentales", price: null, details: "Ideal para interiores y sombras ligeras.", image: "", stock: null },
       { title: "Claveles", subtitle: "Flor clásica", price: null, details: "Fácil de cultivar y con flores duraderas.", image: "", stock: null },
       { title: "Margaritas", subtitle: "Planta campestre", price: null, details: "Aporta luz y frescura en camas florales.", image: "", stock: null },
@@ -72,7 +72,7 @@ export const categoryData = [
     name: "Cactus",
     description: "Plantas suculentas de bajo mantenimiento para espacios interiores y exteriores.",
     products: [
-      { title: "Cactus (variedad general)", subtitle: "Suculeta mixta", price: null, details: "Colección de cactus resistentes y de fácil cuidado.", image: "", stock: null },
+      { title: "Cactus (variedad general)", subtitle: "Suculeta mixta", price: null, details: "Colección de cactus resistentes y de fácil cuidado.", image: "", stock: null, views: 4500, clicks: 300, engagement: 50 },
     ],
   },
   {
@@ -89,7 +89,7 @@ export const categoryData = [
     name: "Hortalizas",
     description: "Verduras y plantas de huerto para cosechas frescas en tu hogar.",
     products: [
-      { title: "Lechuga", subtitle: "Hoja fresca", price: null, details: "Rápido crecimiento y cosecha continua.", image: "", stock: null },
+      { title: "Lechuga", subtitle: "Hoja fresca", price: null, details: "Rápido crecimiento y cosecha continua.", image: "", stock: null, views: 4300, clicks: 290, engagement: 47 },
       { title: "Col", subtitle: "Brassica", price: null, details: "Planta robusta para clima templado.", image: "", stock: null },
       { title: "Brócoli", subtitle: "Verdura saludable", price: null, details: "Ideal para huertos familiares y consumo directo.", image: "", stock: null },
       { title: "Remolacha", subtitle: "Raíz nutritiva", price: null, details: "Planta de raíz dulce y hojas comestibles.", image: "", stock: null },

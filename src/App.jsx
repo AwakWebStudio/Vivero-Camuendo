@@ -1,34 +1,58 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import logoImage from "./assets/vivero-camuendo.jpg";
+import facebookLogo from "../imag_logo/Facebook_Logo.png";
+import whatsappLogo from "../imag_logo/WhatsApp_logo.png";
+import instagramLogo from "../imag_logo/instagram-logo.png";
 import { categoryData } from "./catalog.js";
 
 const serviceData = [
   {
-    title: "Diseño de jardines",
-    description: "Creamos jardines personalizados que aprovechan cada metro de tu espacio.",
+    date: "05 Ene",
+    title: "Planificación y diseño",
+    subtitle: "Jardines funcionales y sostenibles",
+    description: "Creamos espacios verdes desde cero con propuestas personalizadas, planificación por etapas y selección estratégica de plantas.",
     bullets: [
-      "Propuestas visuales 3D",
-      "Selección de plantas y accesorios",
-      "Mantenimiento inicial incluido",
+      "Diseño personalizado residencial o comercial",
+      "Propuestas visuales y etapas claras",
+      "Selección según clima y suelo",
+      "Optimización del espacio",
     ],
   },
   {
-    title: "Huertos urbanos",
-    description: "Sistemas prácticos para cultivar verduras y hierbas en balcones y terrazas.",
+    date: "18 Feb",
+    title: "Implementación y desarrollo",
+    subtitle: "Ejecutamos con técnica y estilo",
+    description: "Convertimos el diseño en realidad con instalación cuidada, riego eficiente y detalles que mantienen la armonía del proyecto.",
     bullets: [
-      "Cajones modulares",
-      "Instalación y riego",
-      "Asesoría en cultivo sostenible",
+      "Preparación de terreno",
+      "Instalación de plantas y césped",
+      "Sistemas de riego eficientes",
+      "Huertos urbanos funcionales",
     ],
   },
   {
-    title: "Mantenimiento de áreas verdes",
-    description: "Cuidado profesional para mantener tus plantas saludables todo el año.",
+    date: "12 Mar",
+    title: "Mantenimiento continuo",
+    subtitle: "Cuidado que protege tu inversión",
+    description: "Ofrecemos mantenimiento regular para mantener la salud, belleza y rendimiento de cada planta y cada área verde.",
     bullets: [
-      "Poda y fertilización",
-      "Control de plagas naturales",
-      "Revisión periódica de riego",
+      "Podas programadas",
+      "Control de plagas y enfermedades",
+      "Fertilización y suelo sano",
+      "Supervisión periódica",
+    ],
+  },
+  {
+    date: "25 Abr",
+    title: "Asesoría y acompañamiento",
+    subtitle: "Apoyo profesional en cada decisión",
+    description: "Brindamos recomendaciones técnicas claras y planes de mejora para que tu jardín evolucione con seguridad.",
+    bullets: [
+      "Evaluación del jardín actual",
+      "Recomendaciones personalizadas",
+      "Planes de mejora y renovación",
+      "Apoyo continuo durante el proyecto",
     ],
   },
 ];
@@ -56,6 +80,10 @@ export default function App() {
   const [activeProductIndex, setActiveProductIndex] = useState(0);
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
   const [catalogPage, setCatalogPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState("home");
+  const [catalogSidebarOpen, setCatalogSidebarOpen] = useState(true);
+  const [catalogSelectedCategory, setCatalogSelectedCategory] = useState(categoryData[0].name);
+  const [catalogSelectedProductIndex, setCatalogSelectedProductIndex] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartBubblePosition, setCartBubblePosition] = useState({ right: 28, bottom: 28 });
@@ -133,12 +161,35 @@ export default function App() {
     return () => cancelAnimationFrame(animationFrame);
   }, [carouselInteracting]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActiveServiceIndex((current) => (current + 1) % serviceData.length);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [activeServiceIndex]);
+
   const activeCategoryData = categoryData.find((category) => category.name === activeCategory);
   const pageSize = 3;
   const activeProducts = activeCategoryData.products;
   const pageCount = Math.max(1, Math.ceil(activeProducts.length / pageSize));
   const pageProducts = activeProducts.slice(catalogPage * pageSize, catalogPage * pageSize + pageSize);
   const activeProduct = activeProducts[activeProductIndex] || pageProducts[0];
+
+  const catalogSelectedCategoryData = categoryData.find((category) => category.name === catalogSelectedCategory);
+  const catalogSelectedProducts = catalogSelectedCategoryData?.products ?? [];
+  const catalogSelectedProduct = catalogSelectedProducts[catalogSelectedProductIndex] || catalogSelectedProducts[0];
+
+  const allProducts = categoryData.flatMap((category) =>
+    category.products.map((product) => ({ ...product, category: category.name }))
+  );
+
+  const getPopularityScore = (product) =>
+    (product.views ?? 0) * 0.5 + (product.clicks ?? 0) * 0.35 + (product.engagement ?? 0) * 0.15;
+
+  const popularProducts = [...allProducts]
+    .sort((a, b) => getPopularityScore(b) - getPopularityScore(a))
+    .slice(0, 6);
 
   const handleAddToCart = (product) => {
     setCartItems((current) => {
@@ -158,7 +209,18 @@ export default function App() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-1 text-zinc-700">
             <p className="font-semibold">📲 0980752799 · 0991165214 · 0994698636</p>
-            <p className="text-zinc-600">📷 Instagram: @vivero.chuskuwarmi · 📘 Facebook: Vivero Chusku Warmi</p>
+            <div className="flex items-center gap-4 mt-2">
+              <span className="text-zinc-600">Síguenos:</span>
+              <a href="https://instagram.com/vivero.chuskuwarmi" target="_blank" rel="noreferrer" className="transition hover:opacity-80">
+                <img src={instagramLogo} alt="Instagram" className="h-6 w-6 rounded" title="Instagram: @vivero.chuskuwarmi" />
+              </a>
+              <a href="https://facebook.com/ViveroChuskuWarmi" target="_blank" rel="noreferrer" className="transition hover:opacity-80">
+                <img src={facebookLogo} alt="Facebook" className="h-6 w-6 rounded" title="Facebook: Vivero Chusku Warmi" />
+              </a>
+              <a href="https://wa.me/593980752799" target="_blank" rel="noreferrer" className="transition hover:opacity-80">
+                <img src={whatsappLogo} alt="WhatsApp" className="h-6 w-6 rounded" title="WhatsApp: 0980752799" />
+              </a>
+            </div>
           </div>
           <a
             href="https://wa.me/593980752799"
@@ -182,11 +244,60 @@ export default function App() {
           </div>
 
           <ul className="hidden items-center gap-6 text-sm font-medium md:flex">
-            <li><a href="#inicio" className="hover:text-emerald-700">Inicio</a></li>
-            <li><a href="#catalogo" className="hover:text-emerald-700">Catálogo</a></li>
-            <li><a href="#servicios" className="hover:text-emerald-700">Servicios</a></li>
-            <li><a href="#blog" className="hover:text-emerald-700">Comunicados</a></li>
-            <li><a href="#contacto" className="hover:text-emerald-700">Contacto</a></li>
+            <li>
+              <button
+                type="button"
+                onClick={() => setCurrentPage("home")}
+                className="hover:text-emerald-700"
+              >
+                Inicio
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => setCurrentPage("catalog")}
+                className="hover:text-emerald-700"
+              >
+                Catálogo
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentPage("home");
+                  setTimeout(() => window.location.hash = "#servicios", 50);
+                }}
+                className="hover:text-emerald-700"
+              >
+                Servicios
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentPage("home");
+                  setTimeout(() => window.location.hash = "#blog", 50);
+                }}
+                className="hover:text-emerald-700"
+              >
+                Comunicados
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentPage("home");
+                  setTimeout(() => window.location.hash = "#contacto", 50);
+                }}
+                className="hover:text-emerald-700"
+              >
+                Contacto
+              </button>
+            </li>
           </ul>
         </div>
       </nav>
@@ -206,12 +317,13 @@ export default function App() {
                 Descubre productos, promociones y servicios con navegación interna para explorar sin exceso de scroll.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="#catalogo"
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage("catalog")}
                   className="rounded-xl bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
                 >
                   Ver catálogo
-                </a>
+                </button>
                 <a
                   href="#contacto"
                   className="rounded-xl border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-700 transition hover:border-emerald-700 hover:text-emerald-700"
@@ -227,191 +339,155 @@ export default function App() {
           </div>
         </section>
 
-        <section id="catalogo" className="mx-auto max-w-7xl px-4 py-20 overflow-x-hidden">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">
-              Catálogo interactivo
-            </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
-              Navega por categorías sin perder el ritmo
-            </h2>
-            <p className="mt-4 text-zinc-600">
-              Selecciona una categoría y navega entre productos con una experiencia ordenada y sin scroll horizontal.
-            </p>
-          </div>
-
-          <div className="mt-8 overflow-hidden">
-            <div
-              ref={carouselRef}
-              className="catalog-carousel flex gap-3 overflow-x-auto px-1 py-1 scrollbar-hide"
-              onPointerDown={() => setCarouselInteracting(true)}
-              onPointerUp={() => setCarouselInteracting(false)}
-              onPointerLeave={() => setCarouselInteracting(false)}
-              onPointerCancel={() => setCarouselInteracting(false)}
-            >
-              {[...categoryData, ...categoryData].map((category, index) => (
-                <button
-                  key={`${category.name}-${index}`}
-                  onClick={() => {
-                    setActiveCategory(category.name);
-                    setActiveProductIndex(0);
-                    setCatalogPage(0);
-                  }}
-                  className={`flex-shrink-0 rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                    category.name === activeCategory
-                      ? "border-emerald-700 bg-emerald-700 text-white"
-                      : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
-              <div className="flex items-center justify-between gap-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Explora productos</p>
-                  <p className="mt-2 text-sm text-zinc-600">Selecciona un producto para ver detalles y agregarlo al carrito.</p>
-                </div>
-                <span className="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                  Nivel 2
-                </span>
-              </div>
-
-              <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center justify-between gap-4 rounded-3xl bg-zinc-50 p-4">
+        {currentPage === "home" ? (
+          <>
+            <section id="catalogo" className="mx-auto max-w-7xl px-4 py-20">
+              <div className="max-w-2xl">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Opciones del catálogo</p>
-                    <p className="mt-2 text-sm text-zinc-600">Desliza o arrastra para avanzar más rápido o más lento.</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
-                    <button
-                      onClick={() => {
-                        const newPage = Math.max(0, catalogPage - 1);
-                        setCatalogPage(newPage);
-                        setActiveProductIndex(newPage * pageSize);
-                      }}
-                      disabled={catalogPage === 0}
-                      className="rounded-full border border-zinc-200 bg-white px-3 py-2 transition hover:border-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      ← Página
-                    </button>
-                    <span>
-                      {catalogPage + 1}/{pageCount}
-                    </span>
-                    <button
-                      onClick={() => {
-                        const newPage = Math.min(pageCount - 1, catalogPage + 1);
-                        setCatalogPage(newPage);
-                        setActiveProductIndex(newPage * pageSize);
-                      }}
-                      disabled={catalogPage === pageCount - 1}
-                      className="rounded-full border border-zinc-200 bg-white px-3 py-2 transition hover:border-emerald-700 disabled:cursor-not-allowed disabled:opacity-40"
-                    >
-                      Página →
-                    </button>
-                  </div>
-                </div>
-
-                <div className="mt-6 pb-4">
-                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                    {pageProducts.map((product, index) => {
-                      const globalIndex = catalogPage * pageSize + index;
-                      return (
-                        <button
-                          key={product.title}
-                          onClick={() => setActiveProductIndex(globalIndex)}
-                          className={`w-full rounded-3xl border p-5 text-left transition ${
-                            globalIndex === activeProductIndex
-                              ? "border-emerald-700 bg-emerald-700 text-white shadow-lg"
-                              : "border-zinc-200 bg-white text-zinc-900 hover:border-emerald-700"
-                          }`}
-                        >
-                          <p className="text-sm font-semibold">{product.subtitle}</p>
-                          <h3 className="mt-3 text-xl font-semibold">{product.title}</h3>
-                          <p className="mt-3 text-sm leading-6 text-zinc-500">{product.details}</p>
-                          <p className="mt-4 text-sm font-semibold">{product.price}</p>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Carrito rápido</p>
-                    <p className="mt-2 text-sm text-zinc-600">Lista de productos que deseas revisar o agregar luego.</p>
-                  </div>
-                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                    {cartItems.length} item{cartItems.length === 1 ? "" : "s"}
-                  </span>
-                </div>
-                <div className="mt-6 space-y-4">
-                  {cartItems.length === 0 ? (
-                    <p className="text-sm text-zinc-500">Tu carrito está vacío. Selecciona un producto para añadirlo.</p>
-                  ) : (
-                    cartItems.map((item) => (
-                      <div key={item.title} className="rounded-3xl bg-zinc-50 p-4">
-                        <div className="flex items-center justify-between gap-3">
-                          <div>
-                            <p className="text-sm font-semibold text-zinc-900">{item.title}</p>
-                            <p className="text-xs text-zinc-500">{item.subtitle}</p>
-                          </div>
-                          <p className="text-sm font-semibold text-emerald-700">x{item.quantity}</p>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-                <div className="mt-6">
-                  <button
-                    onClick={handleSendWhatsApp}
-                    className="w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
-                  >
-                    📲 Enviar lista por WhatsApp
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl bg-emerald-50 p-8 shadow-lg ring-1 ring-emerald-100">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                {activeCategoryData.name}
-              </p>
-              <p className="mt-4 text-lg leading-8 text-zinc-700">{activeCategoryData.description}</p>
-              <div className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
-                      Producto destacado
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">
+                      Catálogo
                     </p>
-                    <h3 className="mt-3 text-2xl font-bold text-zinc-900">{activeProduct.title}</h3>
-                    <p className="mt-2 text-sm text-zinc-500">{activeProduct.subtitle}</p>
+                    <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
+                      Productos más populares
+                    </h2>
                   </div>
-                  <span className="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
-                    {activeProduct.price ?? "Consultar precio"}
-                  </span>
-                </div>
-                <p className="mt-6 text-sm leading-7 text-zinc-600">{activeProduct.details}</p>
-                <div className="mt-8 flex flex-wrap gap-4">
                   <button
-                    onClick={() => handleAddToCart(activeProduct)}
-                    className="inline-flex items-center rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+                    type="button"
+                    onClick={() => setCurrentPage("catalog")}
+                    className="inline-flex items-center justify-center rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
                   >
-                    Agregar al carrito
+                    Ver catálogo completo
                   </button>
-                  <button className="inline-flex items-center rounded-full border border-emerald-700 bg-white px-5 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50">
-                    Ver detalles
+                </div>
+                <p className="mt-4 max-w-2xl text-zinc-600">
+                  Los productos más vistos y más clicados por nuestros clientes. Ideal para ver rápido lo que está en tendencia.
+                </p>
+              </div>
+
+              <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {popularProducts.map((product) => (
+                  <div key={product.title} className="group rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-emerald-700 hover:shadow-md">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">{product.category}</p>
+                    <h3 className="mt-3 text-lg font-semibold text-zinc-900">{product.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-zinc-600">{product.details}</p>
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(product)}
+                      className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 active:scale-95"
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </>
+        ) : (
+          <section id="catalog-page" className="min-h-screen bg-emerald-50 py-8 text-zinc-900">
+            {!catalogSidebarOpen && (
+              <button
+                type="button"
+                onClick={() => setCatalogSidebarOpen(true)}
+                className="fixed top-4 left-4 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-emerald-700 shadow-xl ring-1 ring-zinc-200 transition hover:bg-emerald-50"
+                aria-label="Abrir categorías"
+              >
+                ☰
+              </button>
+            )}
+            <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl gap-6 px-4">
+              <aside className={`fixed inset-y-0 left-0 z-30 w-[18rem] overflow-y-auto bg-white p-6 shadow-2xl transition-transform duration-300 ease-out lg:relative lg:translate-x-0 ${catalogSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+                <div className="mb-8 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Categorías</p>
+                    <h2 className="mt-2 text-xl font-bold text-zinc-900">Explora por tipo</h2>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCatalogSidebarOpen(false)}
+                    className="rounded-full bg-zinc-100 p-2 text-zinc-700 transition hover:bg-zinc-200"
+                    aria-label="Cerrar menú"
+                  >
+                    ✕
                   </button>
+                </div>
+                <div className="space-y-3">
+                  {categoryData.map((category) => (
+                    <button
+                      key={category.name}
+                      type="button"
+                      onClick={() => {
+                        setCatalogSelectedCategory(category.name);
+                        setCatalogSelectedProductIndex(0);
+                        setCatalogSidebarOpen(false);
+                      }}
+                      className={`w-full rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${
+                        category.name === catalogSelectedCategory
+                          ? "border-emerald-700 bg-emerald-50 text-emerald-900 shadow-sm"
+                          : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                </div>
+              </aside>
+
+              <div className={`w-full transition-all duration-300 ${catalogSidebarOpen ? "lg:pl-[18rem]" : "lg:pl-0"}`}>
+                <div className="flex items-center justify-between gap-4 rounded-3xl bg-white p-5 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setCatalogSidebarOpen(true)}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-emerald-700 shadow-lg ring-1 ring-zinc-200 transition hover:bg-emerald-50"
+                      aria-label="Abrir categorías"
+                    >
+                      ☰
+                    </button>
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Catálogo completo</p>
+                      <h1 className="text-xl font-bold text-zinc-900">{catalogSelectedCategoryData?.name ?? "Categoría"}</h1>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage("home")}
+                    className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100"
+                  >
+                    Volver al inicio
+                  </button>
+                </div>
+
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {catalogSelectedProducts.map((product) => (
+                    <div key={product.title} className="rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-emerald-700 hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">{product.subtitle}</p>
+                          <h3 className="mt-2 text-lg font-semibold text-zinc-900">{product.title}</h3>
+                        </div>
+                        <button
+                          type="button"
+                          className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700"
+                        >
+                          {product.category}
+                        </button>
+                      </div>
+                      <p className="mt-4 text-sm leading-6 text-zinc-600">{product.details}</p>
+                      <button
+                        type="button"
+                        onClick={() => handleAddToCart(product)}
+                        className="mt-6 w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
+                      >
+                        Agregar al carrito
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+        )}
 
         <div
           className="fixed z-40 cursor-grab"
@@ -431,111 +507,164 @@ export default function App() {
           </div>
         </div>
 
-          {cartOpen && (
+        {cartOpen && (
+          <div
+            className="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-sm"
+            onClick={() => setCartOpen(false)}
+          >
             <div
-              className="fixed inset-0 z-50 bg-zinc-950/60 backdrop-blur-sm"
-              onClick={() => setCartOpen(false)}
+              className="mx-auto mt-24 max-w-md rounded-3xl bg-white p-6 shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
             >
-              <div
-                className="mx-auto mt-24 max-w-md rounded-3xl bg-white p-6 shadow-2xl"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Carrito rápido</p>
-                    <p className="mt-1 text-sm text-zinc-600">Revisa los productos que añadiste antes de enviar.</p>
-                  </div>
-                  <button
-                    onClick={() => setCartOpen(false)}
-                    className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-800"
-                  >
-                    ✕
-                  </button>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Carrito rápido</p>
+                  <p className="mt-1 text-sm text-zinc-600">Revisa los productos que añadiste antes de enviar.</p>
                 </div>
-
-                <div className="mt-6 space-y-4">
-                  {cartItems.length === 0 ? (
-                    <p className="text-sm text-zinc-500">Tu carrito está vacío. Selecciona un producto para añadirlo.</p>
-                  ) : (
-                    cartItems.map((item) => (
-                      <div key={item.title} className="rounded-3xl bg-zinc-50 p-4">
-                        <div className="flex items-center justify-between gap-3">
-                          <div>
-                            <p className="text-sm font-semibold text-zinc-900">{item.title}</p>
-                            <p className="text-xs text-zinc-500">{item.subtitle}</p>
-                          </div>
-                          <p className="text-sm font-semibold text-emerald-700">x{item.quantity}</p>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-
                 <button
-                  onClick={handleSendWhatsApp}
-                  className="mt-6 w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+                  onClick={() => setCartOpen(false)}
+                  className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-800"
                 >
-                  📲 Enviar lista por WhatsApp
+                  ✕
                 </button>
               </div>
+
+              <div className="mt-6 space-y-4">
+                {cartItems.length === 0 ? (
+                  <p className="text-sm text-zinc-500">Tu carrito está vacío. Selecciona un producto para añadirlo.</p>
+                ) : (
+                  cartItems.map((item) => (
+                    <div key={item.title} className="rounded-3xl bg-zinc-50 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-zinc-900">{item.title}</p>
+                          <p className="text-xs text-zinc-500">{item.subtitle}</p>
+                        </div>
+                        <p className="text-sm font-semibold text-emerald-700">x{item.quantity}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <button
+                onClick={handleSendWhatsApp}
+                className="mt-6 w-full rounded-full bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800"
+              >
+                📲 Enviar lista por WhatsApp
+              </button>
             </div>
-          )}
-        </section>
+          </div>
+        )}
 
         <section id="servicios" className="bg-zinc-50 py-20">
           <div className="mx-auto max-w-7xl px-4">
-            <div className="max-w-2xl">
+            <div className="mx-auto max-w-2xl text-center">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">
                 Servicios
               </p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
-                Soluciones dinámicas para tu proyecto verde
+                Gestión integral para tu espacio verde
               </h2>
+              <p className="mt-4 text-zinc-600">
+                Ofrecemos soluciones completas de jardinería enfocadas en la planificación, cuidado y evolución de tus áreas verdes.
+              </p>
             </div>
 
-            <div className="mt-8 overflow-x-auto pb-4">
-              <div className="flex gap-3 min-w-max">
-                {serviceData.map((service, index) => (
-                  <button
-                    key={service.title}
-                    onClick={() => setActiveServiceIndex(index)}
-                    className={`rounded-full border px-5 py-3 text-sm font-semibold transition ${
-                      index === activeServiceIndex
-                        ? "border-emerald-700 bg-emerald-700 text-white"
-                        : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
-                    }`}
-                  >
-                    {service.title}
-                  </button>
-                ))}
+            <div className="mx-auto mt-8 max-w-4xl rounded-[2rem] border border-emerald-100 bg-white p-8 shadow-sm shadow-emerald-100/50">
+              <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">Gestión integral para tu espacio verde</p>
+                  <h3 className="mt-4 text-2xl font-bold text-zinc-900">Soluciones completas con enfoque técnico y estético</h3>
+                  <p className="mt-4 text-sm leading-7 text-zinc-600">
+                    Planificamos, ejecutamos y acompañamos cada etapa del proyecto para que tu jardín crezca saludable, bello y funcional.
+                  </p>
+                </div>
+                <div className="rounded-3xl bg-emerald-50 p-6 text-center">
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-700 text-2xl text-white shadow-sm">🌿</span>
+                  <p className="mt-4 text-sm font-semibold text-emerald-900">Profesionalismo visible en cada detalle</p>
+                  <p className="mt-3 text-sm leading-6 text-zinc-600">
+                    Atención técnica, estética y de largo plazo para jardines residenciales y comerciales.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="mt-8 grid gap-6 lg:grid-cols-2">
-              <div className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-zinc-200">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">{serviceData[activeServiceIndex].title}</p>
-                <h3 className="mt-4 text-3xl font-bold text-zinc-900">{serviceData[activeServiceIndex].description}</h3>
-                <ul className="mt-6 space-y-3 text-sm leading-7 text-zinc-600">
+            <div className="mt-12 grid gap-6 lg:grid-cols-[auto_1fr_auto] lg:items-start">
+              <div className="hidden lg:flex lg:flex-col lg:gap-3">
+                {serviceData.slice(0, 2).map((service, index) => (
+                  <button
+                    key={service.date}
+                    type="button"
+                    onClick={() => setActiveServiceIndex(index)}
+                    className={`rounded-3xl border px-4 py-4 text-left transition ${
+                      activeServiceIndex === index
+                        ? "border-emerald-700 bg-emerald-50 text-emerald-900 shadow-sm"
+                        : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
+                    }`}
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{service.date}</p>
+                    <p className="mt-3 font-semibold text-zinc-900">{service.title}</p>
+                  </button>
+                ))}
+              </div>
+
+              <div className="rounded-[2rem] border border-zinc-200 bg-white p-8 shadow-sm shadow-zinc-100">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">{serviceData[activeServiceIndex].date}</p>
+                    <h3 className="mt-3 text-3xl font-bold text-zinc-900">{serviceData[activeServiceIndex].title}</h3>
+                    <p className="mt-2 text-sm font-semibold text-zinc-600">{serviceData[activeServiceIndex].subtitle}</p>
+                  </div>
+                  <div className="rounded-3xl bg-emerald-50 px-4 py-3 text-emerald-700 shadow-sm">
+                    <span className="text-2xl">✨</span>
+                  </div>
+                </div>
+                <p className="mt-6 text-sm leading-7 text-zinc-600">{serviceData[activeServiceIndex].description}</p>
+                <ul className="mt-8 space-y-3 text-sm text-zinc-600">
                   {serviceData[activeServiceIndex].bullets.map((bullet) => (
                     <li key={bullet} className="flex gap-3">
                       <span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-700" />
-                      <span>{bullet}</span>
+                      {bullet}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="rounded-3xl bg-emerald-700 p-8 text-white shadow-lg ring-1 ring-emerald-600">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">Servicio complementario</p>
-                <h3 className="mt-4 text-3xl font-bold">Apoyo para proyectos a medida</h3>
-                <p className="mt-6 text-sm leading-7 text-emerald-100">
-                  Si quieres llevar tu espacio verde al siguiente nivel, podemos acompañarte con asesoría en diseño, instalación y mantenimiento.
-                </p>
-                <div className="mt-8 rounded-3xl bg-white/10 p-5">
-                  <p className="text-sm font-semibold text-white">Agenda una visita</p>
-                  <p className="mt-2 text-sm text-emerald-100">Explora opciones de servicio personalizadas para tu casa o negocio.</p>
-                </div>
+              <div className="hidden lg:flex lg:flex-col lg:gap-3">
+                {serviceData.slice(2).map((service, index) => (
+                  <button
+                    key={service.date}
+                    type="button"
+                    onClick={() => setActiveServiceIndex(index + 2)}
+                    className={`rounded-3xl border px-4 py-4 text-left transition ${
+                      activeServiceIndex === index + 2
+                        ? "border-emerald-700 bg-emerald-50 text-emerald-900 shadow-sm"
+                        : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
+                    }`}
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{service.date}</p>
+                    <p className="mt-3 font-semibold text-zinc-900">{service.title}</p>
+                  </button>
+                ))}
               </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:hidden">
+              {serviceData.map((service, index) => (
+                <button
+                  key={service.date}
+                  type="button"
+                  onClick={() => setActiveServiceIndex(index)}
+                  className={`rounded-full border px-4 py-3 text-sm font-semibold transition ${
+                    activeServiceIndex === index
+                      ? "border-emerald-700 bg-emerald-50 text-emerald-900"
+                      : "border-zinc-200 bg-white text-zinc-700 hover:border-emerald-700 hover:bg-emerald-50"
+                  }`}
+                >
+                  {service.date}
+                </button>
+              ))}
             </div>
           </div>
         </section>
@@ -655,10 +784,17 @@ export default function App() {
 
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-wider text-white">Síguenos</h4>
-            <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-              <li>📷 Instagram: @vivero.chuskuwarmi</li>
-              <li>📘 Facebook: Vivero Chusku Warmi</li>
-            </ul>
+            <div className="mt-4 flex gap-4">
+              <a href="https://instagram.com/vivero.chuskuwarmi" target="_blank" rel="noreferrer" className="transition hover:opacity-80" title="Instagram: @vivero.chuskuwarmi">
+                <img src={instagramLogo} alt="Instagram" className="h-8 w-8 rounded-lg" />
+              </a>
+              <a href="https://facebook.com/ViveroChuskuWarmi" target="_blank" rel="noreferrer" className="transition hover:opacity-80" title="Facebook: Vivero Chusku Warmi">
+                <img src={facebookLogo} alt="Facebook" className="h-8 w-8 rounded-lg" />
+              </a>
+              <a href="https://wa.me/593980752799" target="_blank" rel="noreferrer" className="transition hover:opacity-80" title="WhatsApp: 0980752799">
+                <img src={whatsappLogo} alt="WhatsApp" className="h-8 w-8 rounded-lg" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>

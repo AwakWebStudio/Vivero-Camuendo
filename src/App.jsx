@@ -256,10 +256,10 @@ function CatalogPage({
   return (
     <section id="catalog-page" className="min-h-screen bg-emerald-50 py-8 text-zinc-900">
       {!catalogSidebarOpen && (
-        <button type="button" onClick={() => setCatalogSidebarOpen(true)} className="fixed top-4 left-4 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-emerald-700 shadow-xl ring-1 ring-zinc-200 transition hover:bg-emerald-50" aria-label="Abrir categorías">☰</button>
+        <button type="button" onClick={() => setCatalogSidebarOpen(true)} className="fixed top-20 left-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-emerald-700 shadow-xl ring-1 ring-zinc-200 transition hover:bg-emerald-50 md:top-4" aria-label="Abrir categorías">☰</button>
       )}
       <div className="relative mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl gap-6 px-4">
-        <aside className={`fixed inset-y-0 left-0 z-30 w-[18rem] overflow-y-auto bg-white p-6 shadow-2xl transition-transform duration-300 ease-out lg:relative lg:translate-x-0 ${catalogSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <aside className={`fixed inset-y-0 left-0 z-50 w-[18rem] overflow-y-auto bg-white p-6 shadow-2xl transition-transform duration-300 ease-out lg:relative lg:translate-x-0 ${catalogSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <div className="mb-8 flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">Categorías</p>
@@ -318,7 +318,7 @@ export default function App() {
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
   const [serviceHover, setServiceHover] = useState(false);
   const [serviceDragging, setServiceDragging] = useState(false);
-  const serviceDragRef = useRef({ startX: 0, startIndex: 0 });
+  const serviceDragRef = useRef({ startX: 0, startY: 0, startIndex: 0 });
 
   const [activeTopProductIndices, setActiveTopProductIndices] = useState([0, 1, 2, 3, 4, 5]);
   const [topProductHovers, setTopProductHovers] = useState([false, false, false, false, false, false]);
@@ -409,25 +409,35 @@ export default function App() {
   }, [activeTopProductIndices, topProductDraggings, topProductHovers, topProducts.length]);
 
   const handleServicePointerDown = (event) => {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    setServiceDragging(true);
-    serviceDragRef.current = { startX: event.clientX, startIndex: activeServiceIndex };
+    // Solo capturar pointer si es touch (para permitir scroll natural en desktop)
+    if (event.pointerType === 'touch') {
+      event.currentTarget.setPointerCapture(event.pointerId);
+      setServiceDragging(true);
+      serviceDragRef.current = { startX: event.clientX, startY: event.clientY, startIndex: activeServiceIndex };
+    }
   };
 
   const handleServicePointerMove = (event) => {
-    if (!serviceDragging) return;
+    if (!serviceDragging || !serviceDragRef.current) return;
+
     const deltaX = event.clientX - serviceDragRef.current.startX;
-    if (Math.abs(deltaX) > 60) {
+    const deltaY = event.clientY - serviceDragRef.current.startY;
+
+    // Solo activar swipe si el movimiento es principalmente horizontal (|deltaX| > |deltaY| * 2)
+    // y el movimiento horizontal es significativo (> 60px)
+    if (Math.abs(deltaX) > Math.abs(deltaY) * 2 && Math.abs(deltaX) > 60) {
       const direction = deltaX < 0 ? 1 : -1;
       const nextIndex = (serviceDragRef.current.startIndex + direction + serviceData.length) % serviceData.length;
       setActiveServiceIndex(nextIndex);
-      serviceDragRef.current = { startX: event.clientX, startIndex: nextIndex };
+      serviceDragRef.current = { startX: event.clientX, startY: event.clientY, startIndex: nextIndex };
     }
   };
 
   const handleServicePointerUp = (event) => {
-    event.currentTarget.releasePointerCapture(event.pointerId);
-    setServiceDragging(false);
+    if (serviceDragging) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+      setServiceDragging(false);
+    }
   };
 
   const prevService = () => setActiveServiceIndex((current) => (current - 1 + serviceData.length) % serviceData.length);

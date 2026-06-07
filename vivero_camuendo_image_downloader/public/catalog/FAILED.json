@@ -1,0 +1,524 @@
+[
+  {
+    "title": "Durazno",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Prunus persica peach tree fruit",
+      "peach tree fruit"
+    ],
+    "reason": "Download error 429: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/%22_13_-_ITALY_-_Peaches_in_bloom_-_spring_flowers_of_tree_fruit_-_Prunus_persica.JPG/1280px-%22_13_-_ITALY_-_Peaches_in_bloom_-_spring_flowers_of_tree_fruit_-_Prunus_persica.JPG"
+  },
+  {
+    "title": "Manzana",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Malus domestica apple tree fruit",
+      "apple tree fruit"
+    ],
+    "reason": "Download error 429: https://upload.wikimedia.org/wikipedia/commons/9/92/Young_immature_Malus_domestica_Champion_apple_fruitlets_in_May%2C_by_baby-bear.org.jpg"
+  },
+  {
+    "title": "Ciruela (Claudia)",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Prunus domestica greengage plum fruit",
+      "greengage plum tree fruit"
+    ],
+    "reason": "Download error 429: https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Plums_-_The_Fruit_Bowl%2C_Brighton_2023-08-23.jpg/1280px-Plums_-_The_Fruit_Bowl%2C_Brighton_2023-08-23.jpg"
+  },
+  {
+    "title": "Pera",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Pyrus communis pear tree fruit",
+      "pear tree fruit"
+    ],
+    "reason": "Download error 429: https://upload.wikimedia.org/wikipedia/commons/c/c3/Pear_tree_%28Pyrus%29_in_blossom%2C_Kew_Gardens_-_geograph.org.uk_-_166662.jpg"
+  },
+  {
+    "title": "Mango",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Mangifera indica mango tree fruit",
+      "mango tree fruit"
+    ],
+    "reason": "Download error 429: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Mango_tree_flowers%2C_Umaria_district%2C_MP%2C_India.jpg/1280px-Mango_tree_flowers%2C_Umaria_district%2C_MP%2C_India.jpg"
+  },
+  {
+    "title": "Tocte (nogal / nuez)",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Juglans neotropica Andean walnut tree fruit",
+      "Andean walnut Juglans neotropica"
+    ],
+    "reason": "Commons API error 429 for term: Andean walnut Juglans neotropica"
+  },
+  {
+    "title": "Naranjilla",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Solanum quitoense naranjilla fruit plant",
+      "naranjilla fruit plant"
+    ],
+    "reason": "Commons API error 429 for term: Solanum quitoense naranjilla fruit plant"
+  },
+  {
+    "title": "Guayaba",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Psidium guajava guava fruit tree",
+      "guava tree fruit"
+    ],
+    "reason": "Commons API error 429 for term: Psidium guajava guava fruit tree"
+  },
+  {
+    "title": "Guayabilla",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Psidium guineense guayabilla fruit plant",
+      "small guava Psidium guineense"
+    ],
+    "reason": "Commons API error 429 for term: Psidium guineense guayabilla fruit plant"
+  },
+  {
+    "title": "Fresa",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Fragaria ananassa strawberry plant fruit",
+      "strawberry plant fruit"
+    ],
+    "reason": "Commons API error 429 for term: Fragaria ananassa strawberry plant fruit"
+  },
+  {
+    "title": "Frambuesa",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Rubus idaeus raspberry plant fruit",
+      "raspberry plant fruit"
+    ],
+    "reason": "Commons API error 429 for term: Rubus idaeus raspberry plant fruit"
+  },
+  {
+    "title": "Uva",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Vitis vinifera grape vine fruit",
+      "grape vine fruit"
+    ],
+    "reason": "Commons API error 429 for term: Vitis vinifera grape vine fruit"
+  },
+  {
+    "title": "Granadilla",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Passiflora ligularis granadilla fruit vine",
+      "sweet granadilla fruit plant"
+    ],
+    "reason": "Commons API error 429 for term: Passiflora ligularis granadilla fruit vine"
+  },
+  {
+    "title": "Tomate de árbol",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Solanum betaceum tamarillo fruit tree",
+      "tamarillo tree tomato plant"
+    ],
+    "reason": "Commons API error 429 for term: Solanum betaceum tamarillo fruit tree"
+  },
+  {
+    "title": "Tomate riñón",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Solanum lycopersicum tomato plant fruit",
+      "tomato plant red fruit"
+    ],
+    "reason": "Commons API error 429 for term: Solanum lycopersicum tomato plant fruit"
+  },
+  {
+    "title": "Tomate cherry",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "cherry tomato plant fruit",
+      "Solanum lycopersicum cherry tomato plant"
+    ],
+    "reason": "Commons API error 429 for term: cherry tomato plant fruit"
+  },
+  {
+    "title": "Chirimoya",
+    "category": "Plantas frutales",
+    "searchTerms": [
+      "Annona cherimola cherimoya fruit tree",
+      "cherimoya fruit tree"
+    ],
+    "reason": "Commons API error 429 for term: Annona cherimola cherimoya fruit tree"
+  },
+  {
+    "title": "Ruda",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Ruta graveolens rue plant",
+      "rue plant Ruta graveolens"
+    ],
+    "reason": "Commons API error 429 for term: Ruta graveolens rue plant"
+  },
+  {
+    "title": "Sábila",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Aloe vera plant",
+      "Aloe vera succulent plant"
+    ],
+    "reason": "Commons API error 429 for term: Aloe vera plant"
+  },
+  {
+    "title": "Menta",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Mentha mint plant",
+      "Mentha spicata mint plant"
+    ],
+    "reason": "Commons API error 429 for term: Mentha mint plant"
+  },
+  {
+    "title": "Cedro",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Cedrela odorata cedar tree leaves",
+      "Cedrela odorata tree"
+    ],
+    "reason": "Commons API error 429 for term: Cedrela odorata cedar tree leaves"
+  },
+  {
+    "title": "Hierba Luisa",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Cymbopogon citratus lemongrass plant",
+      "lemongrass plant Cymbopogon citratus"
+    ],
+    "reason": "Commons API error 429 for term: Cymbopogon citratus lemongrass plant"
+  },
+  {
+    "title": "Toronjil",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Melissa officinalis lemon balm plant",
+      "lemon balm plant"
+    ],
+    "reason": "Commons API error 429 for term: Melissa officinalis lemon balm plant"
+  },
+  {
+    "title": "Albahaca",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Ocimum basilicum basil plant",
+      "basil plant Ocimum basilicum"
+    ],
+    "reason": "Commons API error 429 for term: Ocimum basilicum basil plant"
+  },
+  {
+    "title": "Apio",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Apium graveolens celery plant",
+      "celery plant Apium graveolens"
+    ],
+    "reason": "Commons API error 429 for term: Apium graveolens celery plant"
+  },
+  {
+    "title": "Dulcamara",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Solanum dulcamara bittersweet plant flower",
+      "bittersweet nightshade plant"
+    ],
+    "reason": "Commons API error 429 for term: Solanum dulcamara bittersweet plant flower"
+  },
+  {
+    "title": "Orégano orejón",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Plectranthus amboinicus Cuban oregano plant",
+      "Cuban oregano plant"
+    ],
+    "reason": "Commons API error 429 for term: Plectranthus amboinicus Cuban oregano plant"
+  },
+  {
+    "title": "Orégano (normal)",
+    "category": "Plantas medicinales / aromáticas",
+    "searchTerms": [
+      "Origanum vulgare oregano plant",
+      "oregano plant Origanum vulgare"
+    ],
+    "reason": "Commons API error 429 for term: Origanum vulgare oregano plant"
+  },
+  {
+    "title": "Cholán",
+    "category": "Plantas nativas",
+    "searchTerms": [
+      "Tecoma stans yellow trumpetbush tree flowers",
+      "Tecoma stans tree flower"
+    ],
+    "reason": "Commons API error 429 for term: Tecoma stans yellow trumpetbush tree flowers"
+  },
+  {
+    "title": "Laurel",
+    "category": "Plantas nativas",
+    "searchTerms": [
+      "Cordia alliodora laurel tree",
+      "Cordia alliodora tree"
+    ],
+    "reason": "Commons API error 429 for term: Cordia alliodora laurel tree"
+  },
+  {
+    "title": "Floripondio",
+    "category": "Plantas nativas",
+    "searchTerms": [
+      "Brugmansia suaveolens angel trumpet flower",
+      "Brugmansia flower plant"
+    ],
+    "reason": "Commons API error 429 for term: Brugmansia suaveolens angel trumpet flower"
+  },
+  {
+    "title": "Aliso",
+    "category": "Plantas nativas",
+    "searchTerms": [
+      "Alnus acuminata alder tree",
+      "Andean alder Alnus acuminata"
+    ],
+    "reason": "Commons API error 429 for term: Alnus acuminata alder tree"
+  },
+  {
+    "title": "Geranios",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Pelargonium geranium flowers plant",
+      "geranium flowers plant"
+    ],
+    "reason": "Commons API error 429 for term: Pelargonium geranium flowers plant"
+  },
+  {
+    "title": "Begonias",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Begonia flowers plant",
+      "Begonia plant flowers"
+    ],
+    "reason": "Commons API error 429 for term: Begonia flowers plant"
+  },
+  {
+    "title": "Claveles",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Dianthus caryophyllus carnation flowers",
+      "carnation flowers plant"
+    ],
+    "reason": "Commons API error 429 for term: Dianthus caryophyllus carnation flowers"
+  },
+  {
+    "title": "Margaritas",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "daisy flowers plant",
+      "Bellis perennis daisy flowers"
+    ],
+    "reason": "Commons API error 429 for term: daisy flowers plant"
+  },
+  {
+    "title": "Ciclamen",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Cyclamen persicum flowers plant",
+      "Cyclamen flower plant"
+    ],
+    "reason": "Commons API error 429 for term: Cyclamen persicum flowers plant"
+  },
+  {
+    "title": "Pensamientos",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Viola tricolor pansy flowers",
+      "pansy flowers plant"
+    ],
+    "reason": "Commons API error 429 for term: Viola tricolor pansy flowers"
+  },
+  {
+    "title": "Dormilonas",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Mimosa pudica sensitive plant flower",
+      "Mimosa pudica plant"
+    ],
+    "reason": "Commons API error 429 for term: Mimosa pudica sensitive plant flower"
+  },
+  {
+    "title": "Clavelina",
+    "category": "Plantas ornamentales (flores)",
+    "searchTerms": [
+      "Dianthus chinensis pink flowers plant",
+      "Dianthus chinensis flower"
+    ],
+    "reason": "Commons API error 429 for term: Dianthus chinensis pink flowers plant"
+  },
+  {
+    "title": "Cactus (variedad general)",
+    "category": "Cactus",
+    "searchTerms": [
+      "cactus potted collection plant",
+      "cactus plants"
+    ],
+    "reason": "Commons API error 429 for term: cactus potted collection plant"
+  },
+  {
+    "title": "Duranta",
+    "category": "Plantas de jardín / decoración exterior",
+    "searchTerms": [
+      "Duranta erecta golden dewdrop shrub flowers",
+      "Duranta erecta plant flowers"
+    ],
+    "reason": "Commons API error 429 for term: Duranta erecta golden dewdrop shrub flowers"
+  },
+  {
+    "title": "Palmeras",
+    "category": "Plantas de jardín / decoración exterior",
+    "searchTerms": [
+      "palm tree garden plant",
+      "potted palm plant"
+    ],
+    "reason": "Commons API error 429 for term: palm tree garden plant"
+  },
+  {
+    "title": "Plantas colgantes",
+    "category": "Plantas de jardín / decoración exterior",
+    "searchTerms": [
+      "hanging plants basket garden",
+      "hanging house plants basket"
+    ],
+    "reason": "Commons API error 429 for term: hanging plants basket garden"
+  },
+  {
+    "title": "Helechos",
+    "category": "Plantas de jardín / decoración exterior",
+    "searchTerms": [
+      "fern potted plant",
+      "fern plant"
+    ],
+    "reason": "Commons API error 429 for term: fern potted plant"
+  },
+  {
+    "title": "Lechuga",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Lactuca sativa lettuce plant",
+      "lettuce plant"
+    ],
+    "reason": "Commons API error 429 for term: Lactuca sativa lettuce plant"
+  },
+  {
+    "title": "Col",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Brassica oleracea cabbage plant",
+      "cabbage plant"
+    ],
+    "reason": "Commons API error 429 for term: Brassica oleracea cabbage plant"
+  },
+  {
+    "title": "Brócoli",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Brassica oleracea italica broccoli plant",
+      "broccoli plant"
+    ],
+    "reason": "Commons API error 429 for term: Brassica oleracea italica broccoli plant"
+  },
+  {
+    "title": "Remolacha",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Beta vulgaris beetroot plant",
+      "beetroot plant"
+    ],
+    "reason": "Commons API error 429 for term: Beta vulgaris beetroot plant"
+  },
+  {
+    "title": "Cebolla larga",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Allium fistulosum scallion plant",
+      "spring onion plant"
+    ],
+    "reason": "Commons API error 429 for term: Allium fistulosum scallion plant"
+  },
+  {
+    "title": "Cebolla paiteña",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Allium cepa red onion plant",
+      "red onion plant"
+    ],
+    "reason": "Commons API error 429 for term: Allium cepa red onion plant"
+  },
+  {
+    "title": "Alfalfa",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Medicago sativa alfalfa plant",
+      "alfalfa plant"
+    ],
+    "reason": "Commons API error 429 for term: Medicago sativa alfalfa plant"
+  },
+  {
+    "title": "Apio",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Apium graveolens celery plant",
+      "celery plant Apium graveolens"
+    ],
+    "reason": "Commons API error 429 for term: Apium graveolens celery plant"
+  },
+  {
+    "title": "Perejil",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Petroselinum crispum parsley plant",
+      "parsley plant"
+    ],
+    "reason": "Commons API error 429 for term: Petroselinum crispum parsley plant"
+  },
+  {
+    "title": "Cilantro",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Coriandrum sativum coriander cilantro plant",
+      "cilantro plant"
+    ],
+    "reason": "Commons API error 429 for term: Coriandrum sativum coriander cilantro plant"
+  },
+  {
+    "title": "Papa",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Solanum tuberosum potato plant",
+      "potato plant"
+    ],
+    "reason": "Commons API error 429 for term: Solanum tuberosum potato plant"
+  },
+  {
+    "title": "Nabo",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Brassica rapa turnip plant",
+      "turnip plant"
+    ],
+    "reason": "Commons API error 429 for term: Brassica rapa turnip plant"
+  },
+  {
+    "title": "Nabo chino",
+    "category": "Hortalizas",
+    "searchTerms": [
+      "Raphanus sativus daikon radish plant",
+      "daikon radish plant"
+    ],
+    "reason": "Commons API error 429 for term: Raphanus sativus daikon radish plant"
+  }
+]
